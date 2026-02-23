@@ -1,0 +1,87 @@
+const express = require('express');
+const session = require('express-session');
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.urlencoded({ extended: true }));
+
+// Initialize the session middleware
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }  // Session valid for 1 minute
+}));
+
+// Route: Home Page
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>Welcome to the Session Management App</h1>
+    <p><a href="/signin">Login</a> | <a href="/logout">Logout</a> | <a href="/account">Profile</a></p>
+  `);
+});
+
+// TODO: Route: Login Page (GET request)
+// - If logged in: redirect to /account page
+// - If not logged in: display htmlForm below for the login page.
+app.get('/signin', (req, res) => {
+  const htmlForm = 
+  `
+    <h2>Login</h2>
+    <form method="POST" action="/signin">
+      <label>Username:</label>
+      <input type="text" name="username" required>
+      <button type="submit">Login</button>
+    </form>
+  `;
+  if (req.session.username) {
+    res.redirect("/account");
+  } else {
+    res.send(htmlForm);
+  }
+});
+
+// TODO: Route: Login (POST request)
+// - Handle the login and store the username in the session
+// - Redirect to the /account page after login
+app.post('/signin', (req, res) => {
+  req.session.username = req.body.username;
+  res.redirect("/account");
+});
+
+// TODO: Route: Profile Page (GET request)
+// - If logged in: display the profilePage only if the user is logged in
+// - If not logged in: redirect to /signin page
+app.get('/account', (req, res) => {
+  let profilePage = 
+  `
+    <h2>Profile</h2>
+    <p>Welcome, ${req.session.username}!</p>
+    <p><a href="/logout">Logout</a></p>
+  `;
+  if (req.session.username) {
+    res.send(profilePage);
+  } else {
+    res.redirect("/signin");
+  }
+});
+
+// TODO: Route: Logout (GET request)
+// Destroy the session and redirect to home
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+});
+
+// DO NOT MODIFY BELOW THIS LINE
+// Conditionally start the server if this script is run directly
+if (require.main === module) {
+  app.listen(3000, () => {
+      console.log('Server is running on http://localhost:3000');
+  });
+}
+
+// For Plussa grader
+module.exports = app;
