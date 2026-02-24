@@ -5,7 +5,7 @@ This repository contains my implementations and exercise solutions for the **[In
 
 The course focuses on designing and building simple end-to-end web applications while understanding core web technologies and architectural concepts.  
 
-![cover](https://raw.githubusercontent.com/theanasuddin/Introduction-To-Fullstack-Development/refs/heads/master/cover.png)
+![cover]()
 
 ---
 
