@@ -3,7 +3,9 @@
 
 This repository contains my implementations and exercise solutions for the **[Introduction To Full Stack Development](https://opiskelijanopas.tuni.fi/en/tampere-university/curriculum/course-units/otm-949208ad-9f08-452d-bd64-78588079c3d6?year=2025)** course completed at Tampere University.
 
-The course focuses on designing and building simple end-to-end web applications while understanding core web technologies and architectural concepts.
+The course focuses on designing and building simple end-to-end web applications while understanding core web technologies and architectural concepts.  
+
+![cover](https://raw.githubusercontent.com/theanasuddin/Introduction-To-Fullstack-Development/refs/heads/master/cover.png)
 
 ---
 
